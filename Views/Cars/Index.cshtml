@@ -1,0 +1,60 @@
+﻿@model IEnumerable<APS.NET_MVC.Models.Car>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Cars</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+@using (Html.BeginForm("Index", "Cars", FormMethod.Get))
+{
+    <p>
+        Search filter: @Html.TextBox("searchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Production)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Engine)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Production)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Engine.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CarId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CarId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CarId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
